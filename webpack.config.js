@@ -1,10 +1,12 @@
 const PATH = require('path'),
     Webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production',
-    RES_PATH = PATH.join(__dirname, 'resources'),
-    PUB_PATH = PATH.join(__dirname);
+    ROOT_PATH = PATH.join(__dirname),                         // ./
+    RES_PATH = PATH.join(ROOT_PATH, 'resources'),             // ./resources
+    OUTPUT_PATH = PATH.join(ROOT_PATH, PROD ? 'tmp' : 'dev'); // ./tmp OR ./dev
 
 
 module.exports = {
@@ -17,15 +19,15 @@ module.exports = {
 
 
   output: {
-    path: PUB_PATH,
+    path: OUTPUT_PATH,
     // publicPath: '/',
-    filename: 'Awesome-List-Generator.tmp.js'
+    filename: 'Awesome-List-Generator.js'
   },
 
 
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
+      // 'vue$': 'vue/dist/vue.common.js'
     },
 
     extensions: [
@@ -72,35 +74,36 @@ module.exports = {
         }
       },
 
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: "style-loader",
-          loader: [
-            'css-loader',
-            'postcss-loader'
-          ]
-        })
-      },
+      // Write all style in vue file
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract({
+      //     fallbackLoader: "style-loader",
+      //     loader: [
+      //       'css-loader',
+      //       'postcss-loader'
+      //     ]
+      //   })
+      // },
+      //
+      // {
+      //   test: /\.scss$/,
+      //   loader: ExtractTextPlugin.extract({
+      //     fallbackLoader: 'style-loader',
+      //     loader: [
+      //       'css-loader',
+      //       'postcss-loader',
+      //       'sass-loader'
+      //     ]
+      //   })
+      // },
 
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            'css-loader',
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
-      },
-
+      // Inherit Github font
       // {
       //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
       //   loader: 'url-loader',
       //   query: {
-      //     limit: 8192,
-      //     name: 'fonts/[name].[ext]'
+      //     limit: 8192000
       //   }
       // },
 
@@ -108,7 +111,7 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url-loader',
         query: {
-          limit: 8192000
+          limit: 8192000000
         }
       }
     ]
@@ -117,14 +120,28 @@ module.exports = {
 
   plugins: [
 
-    // loader options
+    // Webpack-Dev-Server
+    new Webpack.HotModuleReplacementPlugin(),
+
+    // Clean Folders
+    new CleanWebpackPlugin([
+      PATH.join(ROOT_PATH, 'tmp'),
+      PATH.join(ROOT_PATH, 'dev/*.js'),
+      PATH.join(ROOT_PATH, 'dev/*.css')
+    ], {
+      // root: './',
+      // verbose: false,
+      // dry: false,
+      // exclude: []
+    }),
+
+    // Loader Options
     new Webpack.LoaderOptionsPlugin({
       minimize: true,
       options: {
         postcss: [
           require('autoprefixer')({
             // https://github.com/postcss/autoprefixer
-            remove: false,
             browsers: ['> 5%']
           })
         ]
@@ -133,7 +150,7 @@ module.exports = {
 
     // CSS
     new ExtractTextPlugin({
-      filename: 'Awesome-List-Generator.tmp.css',
+      filename: 'Awesome-List-Generator.css',
       disable: false,
       allChunks: true
     }),
@@ -149,13 +166,25 @@ module.exports = {
   ],
 
 
-  // hidden WARNING
+  // Hidden WARNING
   performance: {
     hints: false
   },
 
 
   externals: {
-    vue: 'vue'
+    vue: 'window.Vue'
+  },
+
+
+  devServer: {
+    // https://webpack.github.io/docs/webpack-dev-server.html#inline-mode-with-node-js-api
+    host: '192.168.1.54',
+    port: '8080',
+    contentBase: './dev',
+    colors: true,
+    historyApiFallback: true,
+    inline: true,
+    hot: true
   }
 };

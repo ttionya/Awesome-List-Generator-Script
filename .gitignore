@@ -1,4 +1,7 @@
 /node_modules
 
-Awesome-List-Generator.tmp.js
-Awesome-List-Generator.tmp.css
+/tmp
+/dev/*.js
+/dev/*.css
+
+*.log

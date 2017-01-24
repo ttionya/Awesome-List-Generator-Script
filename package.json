@@ -4,7 +4,9 @@
   "description": "Awesome List Generator browser script.",
   "main": "Awesome-List-Generator.min.user.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server",
+    "prod": "cross-env NODE_ENV='production' webpack"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.0",
     "cross-env": "^3.1.0",
     "css-loader": "^0.26.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.0",
