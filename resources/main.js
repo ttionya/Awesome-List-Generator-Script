@@ -2,23 +2,19 @@
 
 
 import Vue from 'vue';
-import bus from './bus';
-
-import setting from './components/Setting';
+import Main from './Main';
 
 
 new Vue({
   el: '#alg',
 
-  data: {
-      username: ''
+  created () {
+
+    // Create ALG Div
+    const algDiv = document.createElement('div');
+    algDiv.id = 'alg';
+    document.body.appendChild(algDiv);
   },
 
-  created () {
-    const algDiv = document.createElement('div');
-
-    algDiv.id = 'alg';
-
-    document.body.appendChild(algDiv);
-  }
+  render: h => h(Main)
 });
