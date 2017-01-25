@@ -14,7 +14,7 @@
 
     .alg-loading-mask {
         position: absolute;
-        top: 33px;
+        top: 34px; // .alg-toolbar (height + 1)
         right: 0;
         bottom: 0;
         left: 0;

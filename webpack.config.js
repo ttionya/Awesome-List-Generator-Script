@@ -142,7 +142,12 @@ module.exports = {
         postcss: [
           require('autoprefixer')({
             // https://github.com/postcss/autoprefixer
-            browsers: ['> 5%']
+            browsers: [
+              'Chrome >= 31',
+              'Firefox >= 46',
+              'Edge >= 14',
+              'Safari >= 5'
+            ]
           })
         ]
       }
