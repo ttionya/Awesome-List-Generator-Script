@@ -1,6 +1,6 @@
 {
   "name": "awesome-list-generator-script",
-  "version": "1.0.0",
+  "version": "2.0.0-beta",
   "description": "Awesome List Generator browser script.",
   "main": "Awesome-List-Generator.min.user.js",
   "scripts": {
