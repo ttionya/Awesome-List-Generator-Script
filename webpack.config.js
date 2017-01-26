@@ -13,9 +13,9 @@ module.exports = {
   devtool: PROD ? false : '#cheap-module-eval-source-map',
 
 
-  entry: {
-    main: PATH.join(RES_PATH, 'main.js') // ./resources/main.js
-  },
+  entry: [
+    PATH.join(RES_PATH, 'main.js') // ./resources/main.js
+  ],
 
 
   output: {
@@ -120,9 +120,6 @@ module.exports = {
 
   plugins: [
 
-    // Webpack-Dev-Server
-    new Webpack.HotModuleReplacementPlugin(),
-
     // Clean Folders
     new CleanWebpackPlugin([
       PATH.join(ROOT_PATH, 'tmp'),
@@ -179,17 +176,5 @@ module.exports = {
 
   externals: {
     vue: 'window.Vue'
-  },
-
-
-  devServer: {
-    // https://webpack.github.io/docs/webpack-dev-server.html#inline-mode-with-node-js-api
-    host: '192.168.1.54',
-    port: '8080',
-    contentBase: './dev',
-    colors: true,
-    historyApiFallback: true,
-    inline: true,
-    hot: true
   }
 };
