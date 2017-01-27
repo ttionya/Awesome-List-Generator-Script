@@ -2,7 +2,7 @@ import { checkServer } from '../functions';
 
 
 // Try to get server information from LocalStorage
-export const getServerInfo = (state) => {
+export const getServerInfo = state => {
     let serverInfo = localStorage.getItem('server');
 
     if (serverInfo) {
@@ -26,3 +26,6 @@ export const getServerInfo = (state) => {
         state.activeComponent = 'welcome';
     }
 };
+
+
+export const changeComponent = (state, component) => state.activeComponent = component;

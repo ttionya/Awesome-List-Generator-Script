@@ -54,7 +54,6 @@
 
             <component class="alg-content"
                        :is="activeComponent"
-                       @goSetting="go('setting')"
             ></component>
         </div>
     </div>

@@ -1,37 +1,40 @@
 <template>
     <div class="alg-welcome">
         <h3>Thank you for using Awesome List Generator</h3>
-        <p>This is your first time use Awesome List Generator.</p>
-        <p>Let us make some settings.</p>
-        <p>Make sure you have run Awesome List Generator server. <a href="https://github.com/ttionya/Awesome-List-Generator">Github</a></p>
-        <p>Please click <span style="color: red;">always allow all domains</span> button when request to a cross origin resource. <a href="https://github.com/ttionya/Awesome-List-Generator-Script">Why</a></p>
+        <p>This script is used to add repository to your awesome list with description and categories.</p>
+        <p>You have to make some settings first. Make sure your <a href="https://github.com/ttionya/Awesome-List-Generator">Awesome List Generator</a> server is running.</p>
+        <p><strong>Note:</strong> Please click <code style="color: red;">always allow all domains</code> button when request to a cross origin resource. <a href="https://github.com/ttionya/Awesome-List-Generator-Script#faq">Why</a></p>
 
         <button class="btn btn-sm alg-btn"
                 type="button"
                 style="float: right;"
-                @click="start"
-        >Start</button>
+                @click="goSetting"
+        >Setting</button>
     </div>
 </template>
 
 <style lang="scss">
     .alg-welcome {
-        min-height: 230px;
+        min-height: 260px;
         margin: 0 10px;
     }
 
 
-    .alg-welcome h3,
+    .alg-welcome h3 {
+        margin: .3em 0;
+    }
+
+
     .alg-welcome p {
-        margin: .5em 0;
+        margin: .8em 0;
     }
 </style>
 
 <script>
     export default {
         methods: {
-            start () {
-                this.$emit('goSetting');
+            goSetting () {
+                this.$store.commit('changeComponent', 'setting');
             }
         }
     }
