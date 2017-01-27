@@ -2,7 +2,7 @@
   "name": "awesome-list-generator-script",
   "version": "2.0.0-beta",
   "description": "Awesome List Generator browser script.",
-  "main": "Awesome-List-Generator.min.user.js",
+  "main": "Awesome-List-Generator.user.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --inline --host 192.168.1.54 --port 8080 --content-base ./dev",
@@ -42,6 +42,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vuex": "^2.1.0"
   }
 }
