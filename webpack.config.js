@@ -175,6 +175,7 @@ module.exports = {
 
 
   externals: {
-    vue: 'window.Vue'
+    vue: 'window.Vue',
+    vuex: 'window.Vuex'
   }
 };

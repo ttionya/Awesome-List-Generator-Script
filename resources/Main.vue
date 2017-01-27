@@ -54,7 +54,6 @@
 
             <component class="alg-content"
                        :is="activeComponent"
-                       @goSetting="go('setting')"
             ></component>
         </div>
     </div>
@@ -107,12 +106,13 @@
 
         .alg-close {
             float: right;
-            padding: 0 5px;
+            padding: 0 8px;
             line-height: 26px;
             cursor: pointer;
 
             &:hover {
                 color: #eb7350;
+                text-decoration: none;
             }
         }
     }
@@ -129,7 +129,6 @@
 </style>
 
 <script>
-    import bus from './bus';
     import Loading from './components/Loading';
     import Welcome from './components/Welcome';
     import Setting from './components/Setting';
@@ -167,17 +166,16 @@
         },
 
         computed: {
-
-            // bus data
             activeComponent () {
-                return bus.activeComponent;
-            },
-            githubUrl () {
-                return bus.githubUrl;
+                return this.$store.state.activeComponent;
             },
             connected () {
-                return bus.connected;
-            }
+                return this.$store.state.connected;
+            },
+            githubUrl () {
+                return this.$store.state.githubUrl;
+            },
+
         }
     }
 </script>
