@@ -17,6 +17,9 @@ export const getServerInfo = state => {
             this.activeComponent = 'home';
         }
         else {
+            state.server.host = state.server.host || '';
+            state.server.port = state.server.port || '';
+            state.server.key = state.server.key || '';
             state.activeComponent = 'setting';
         }
     }
@@ -29,3 +32,6 @@ export const getServerInfo = state => {
 
 
 export const changeComponent = (state, component) => state.activeComponent = component;
+
+
+export const loadingStatus = (state, { visible, text }) => state.loading = { visible: visible, text: text };

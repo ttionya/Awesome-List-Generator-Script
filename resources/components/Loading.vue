@@ -81,15 +81,13 @@
 
 <script>
     export default {
-        data () {
-            return {
-                visible: true,
-                text: 'Connecting...'
+        computed: {
+            visible () {
+                return this.$store.state.loading.visible;
+            },
+            text () {
+                return this.$store.state.loading.text;
             }
-        },
-        //props: [
-        //    'visible',
-        //    'text'
-        //]
+        }
     }
 </script>

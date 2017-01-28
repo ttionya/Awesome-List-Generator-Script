@@ -52,6 +52,9 @@
             </div>
 
 
+            <alg-loading></alg-loading>
+
+
             <component class="alg-content"
                        :is="activeComponent"
             ></component>
@@ -126,6 +129,22 @@
     .alg-btn {
         margin-right: 15px;
     }
+
+    .alg-input-lg {
+        width: 350px;
+        margin: 3px 0;
+    }
+    .alg-input {
+        width: 350px;
+        margin: 5px 0;
+    }
+    .alg-textarea {
+        height: 50px;
+        margin: 3px 0;
+        resize: none;
+    }
+
+    .alg-hidden { display: none;}
 </style>
 
 <script>
@@ -142,7 +161,7 @@
         },
 
         components: {
-            loading: Loading,
+            'alg-loading': Loading,
             welcome: Welcome,
             setting: Setting,
             home: Home
