@@ -3,6 +3,11 @@ import Main from './Main';
 import store from './store/index';
 
 
+Vue.config.keyCodes = {
+    comma: 188
+};
+
+
 new Vue({
     el: '#alg',
 

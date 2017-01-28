@@ -135,8 +135,6 @@
         resize: none;
     }
 
-    .alg-hidden { display: none;}
-
 
     // Scroll Bar
     .alg-scroll {
