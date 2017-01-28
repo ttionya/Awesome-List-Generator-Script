@@ -12,6 +12,10 @@ import * as getters from './getters';
 const state = {
     activeComponent: 'loading',     // Current component
     connected: false,               // Connected to the server
+    loading: {
+        visible: false,
+        text: ''
+    },                              // Loading component
     githubUrl: '',                  // My Github repository, get it from server
     server: { },                    // Server information about host, port and RSA key
 };
