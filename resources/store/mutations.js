@@ -14,7 +14,8 @@ export const getServerInfo = state => {
         if (checkServer(state.server.host, state.server.port, state.server.key)) {
             // Connection
 
-            this.activeComponent = 'home';
+            state.connected = true;
+            state.activeComponent = 'home';
         }
         else {
             state.server.host = state.server.host || '';

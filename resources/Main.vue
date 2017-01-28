@@ -29,14 +29,6 @@
                         </svg>
                     </a>
                     <a class="alg-icon"
-                       @click.prevent="refresh"
-                       title="Refresh"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 32 32">
-                            <path d="M32 12h-12l4.485-4.485c-2.267-2.266-5.28-3.515-8.485-3.515s-6.219 1.248-8.485 3.515c-2.266 2.267-3.515 5.28-3.515 8.485s1.248 6.219 3.515 8.485c2.267 2.266 5.28 3.515 8.485 3.515s6.219-1.248 8.485-3.515c0.189-0.189 0.371-0.384 0.546-0.583l3.010 2.634c-2.933 3.349-7.239 5.464-12.041 5.464-8.837 0-16-7.163-16-16s7.163-16 16-16c4.418 0 8.418 1.791 11.313 4.687l4.687-4.687v12z"></path>
-                        </svg>
-                    </a>
-                    <a class="alg-icon"
                        :href="githubUrl"
                        title="My Github"
                        v-show="githubUrl"
@@ -99,12 +91,16 @@
     .alg-toolbar {
         height: 33px;
         padding: 3px 10px;
+        line-height: 26px;
         border-bottom: 1px #d9d9d9 solid;
 
         .alg-icon {
             margin-right: 4px;
             cursor: pointer;
-            vertical-align: middle;
+
+            svg {
+                vertical-align: middle;
+            }
         }
 
         .alg-close {
@@ -130,21 +126,79 @@
         margin-right: 15px;
     }
 
-    .alg-input-lg {
-        width: 350px;
-        margin: 3px 0;
-    }
     .alg-input {
         width: 350px;
         margin: 5px 0;
     }
     .alg-textarea {
-        height: 50px;
         margin: 3px 0;
         resize: none;
     }
 
     .alg-hidden { display: none;}
+
+
+    // Scroll Bar
+    .alg-scroll {
+        &::-webkit-scrollbar {
+            width: 12px;
+            height: 16px;
+        }
+        &::-webkit-scrollbar-button {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+        &::-webkit-scrollbar-corner{
+            background-color: transparent;
+        }
+        &::-webkit-scrollbar-track:vertical {
+            background-clip: padding-box;
+        }
+        &::-webkit-scrollbar-track:vertical {
+            border-left: 5px solid transparent;
+            border-right: 0 solid transparent;
+        }
+        &::-webkit-scrollbar-track:horizontal {
+            border-top: 5px solid transparent;
+            border-bottom: 0 solid transparent;
+        }
+        &::-webkit-scrollbar-track:vertical:hover,
+        &::-webkit-scrollbar-track:vertical:active,
+        &::-webkit-scrollbar-track:horizontal:hover,
+        &::-webkit-scrollbar-track:horizontal:active {
+            background-color: rgba(0,0,0,0.05);
+        }
+        &::-webkit-scrollbar-thumb:vertical {
+            background-clip: padding-box;
+            min-height: 28px;
+        }
+        &::-webkit-scrollbar-thumb:vertical {
+            border-top: 0 solid transparent;
+            border-bottom: 0 solid transparent;
+            border-left: 5px solid transparent;
+            border-right: 0 solid transparent;
+        }
+        &::-webkit-scrollbar-thumb:horizontal {
+            background-clip: padding-box;
+            min-width: 28px;
+        }
+        &::-webkit-scrollbar-thumb:horizontal {
+            border-top: 5px solid transparent;
+            border-bottom: 0 solid transparent;
+            border-left: 0 solid transparent;
+            border-right: 0 solid transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,.2);
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0,0,0,.4);
+        }
+        &::-webkit-scrollbar-thumb:active {
+            background-color: rgba(0,0,0,.5);
+        }
+    }
 </style>
 
 <script>
@@ -180,7 +234,7 @@
             },
 
             go (component) {
-                bus.activeComponent = component;
+                this.$store.commit('changeComponent', component);
             }
         },
 

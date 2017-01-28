@@ -32,7 +32,8 @@
                 <td><label for="alg-key">RSA Key:</label></td>
                 <td>
                     <textarea id="alg-key"
-                              class="form-control alg-input alg-textarea"
+                              class="form-control alg-input alg-textarea alg-scroll"
+                              rows="3"
                               placeholder="RSA Key"
                               v-model="key"
                               @focus="errorMsg = '　'"
@@ -128,7 +129,7 @@ this.errorMsg = '　';
                 });
 
                 if (this.errorMsg === '　') {
-                    this.$store.commit('changeComponent', 'main');
+                    this.$store.commit('changeComponent', 'home');
                 }
             },
 
