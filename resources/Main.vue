@@ -147,45 +147,25 @@
             height: 0;
             display: none;
         }
-        &::-webkit-scrollbar-corner{
+        &::-webkit-scrollbar-corner {
             background-color: transparent;
         }
         &::-webkit-scrollbar-track:vertical {
+            border-left: 5px solid transparent;
+            border-right: 0 solid transparent;
             background-clip: padding-box;
         }
         &::-webkit-scrollbar-track:vertical {
-            border-left: 5px solid transparent;
-            border-right: 0 solid transparent;
-        }
-        &::-webkit-scrollbar-track:horizontal {
-            border-top: 5px solid transparent;
-            border-bottom: 0 solid transparent;
-        }
-        &::-webkit-scrollbar-track:vertical:hover,
-        &::-webkit-scrollbar-track:vertical:active,
-        &::-webkit-scrollbar-track:horizontal:hover,
-        &::-webkit-scrollbar-track:horizontal:active {
-            background-color: rgba(0,0,0,0.05);
+            &:hover,
+            &:active {
+                background-color: rgba(0,0,0,0.05);
+            }
         }
         &::-webkit-scrollbar-thumb:vertical {
-            background-clip: padding-box;
             min-height: 28px;
-        }
-        &::-webkit-scrollbar-thumb:vertical {
-            border-top: 0 solid transparent;
-            border-bottom: 0 solid transparent;
+            border: 0;
             border-left: 5px solid transparent;
-            border-right: 0 solid transparent;
-        }
-        &::-webkit-scrollbar-thumb:horizontal {
             background-clip: padding-box;
-            min-width: 28px;
-        }
-        &::-webkit-scrollbar-thumb:horizontal {
-            border-top: 5px solid transparent;
-            border-bottom: 0 solid transparent;
-            border-left: 0 solid transparent;
-            border-right: 0 solid transparent;
         }
         &::-webkit-scrollbar-thumb {
             background-color: rgba(0,0,0,.2);
