@@ -50,7 +50,7 @@ try {
     js = fs.readFileSync(PATH.join(tmpPath, 'Awesome-List-Generator.js'), 'utf-8');
 
     // Write file
-    fs.writeFileSync(PATH.join(rootPath, 'Awesome-List-Generator.user.js'), meta + 'GM_addStyle("' + css + '");\n\n' + js);
+    fs.writeFileSync(PATH.join(rootPath, 'Awesome-List-Generator.user.js'), meta + 'GM_addStyle(\'' + css + '\');\n\n' + js);
 
     // Delete tmp directory
     execSync('rm -rf ' + tmpPath);

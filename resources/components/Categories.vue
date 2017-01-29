@@ -1,15 +1,20 @@
 <template>
     <div class="alg-cate">
-        <div class="form-control alg-input alg-cate-box">
-            <span class="alg-cate-tags" v-for="item in categories">{{ item }}</span>
+        <div class="form-control alg-input alg-cate-box" :class="{ 'alg-no-cate': cateLen === 0 }" @click="removeTag($event)">
+            <transition-group name="alg-fade"
+                              tag="div"
+                              v-show="cateLen"
+            >
+                <span class="alg-cate-tags" v-for="item in categories" :key="item">{{ item }}</span>
+            </transition-group>
         </div>
         <input id="alg-cate"
                class="form-control alg-input"
                type="text"
                placeholder="Categories but not Tags (Split by Comma or Entry)"
                v-model="currentCate"
-               @keydown.enter.prevent="addToBox"
-               @keydown.comma.prevent="addToBox"
+               @keydown.enter.prevent="addTag"
+               @keydown.comma.prevent="addTag"
                list="cate-list"
         />
         <datalist id="cate-list">
@@ -25,18 +30,48 @@
 <style lang="scss">
     .alg-cate-box {
         width: 350px;
+        min-height: 36px;   // Do not touch
+
+
+        // Cover .form-control style
+        &.alg-no-cate {
+            padding: 0;
+
+            &::before {
+                display: inline-block;
+                width: 348px;       // 350 - 2
+                text-align: center;
+                line-height: 34px;  // 36 - 2
+                border-radius: 3px;
+                background-color: #eee;
+                content: 'No Categories';
+            }
+        }
+
+
+        .alg-cate-tags {
+            display: inline-block;
+            padding: 1px 6px;
+            margin: 2px 8px 2px 0;
+            line-height: 14px;
+            border: solid 1px #ddd;
+            border-radius: 5px;
+            background-color: #eee;
+            word-break: break-all;
+            cursor: pointer;
+
+            &:hover {
+                color: red;
+                text-decoration: line-through;
+            }
+        }
     }
 
-    .alg-cate-box { position: relative; min-height: 36px; line-height: 22px; }
-    .alg-cate-box-focus { border-color: #51a7e8; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5) }
-    .alg-cate-tags { display: inline-block; padding: 1px 6px; margin: 2px 8px 2px 0; line-height: 14px; border: solid 1px #ddd; border-radius: 5px; background-color: #eee; cursor: pointer; }
-    .alg-cate-tags:hover { color: red; text-decoration: line-through; }
-    .alg-cate-input { display: inline-block; line-height: inherit; outline: none; }
-    .alg-cate-input:empty:before { color: #ccc; cursor: text; content: attr(placeholder); }
-    .alg-cate-opt { position: absolute; width: 350px; border: solid 1px #ddd; border-top: 0; background-color: #fff; z-index: 1001; }
-    .alg-cate-opt-list { margin-bottom: 0; margin-top: 0; padding-left: 0; list-style: none; }
-    .alg-cate-opt-list li { width: 348px; padding: 0 8px; font-size: 14px; line-height: 22px; cursor: default; }
-    .alg-cate-opt-item-active { background-color: #f0f0f0;}
+
+    .alg-fade-leave-active {
+        transition: all .3s ease-in;
+        opacity: 0;
+    }
 </style>
 
 <script>
@@ -49,7 +84,7 @@
         },
 
         methods: {
-            addToBox () {
+            addTag () {
                 let currentCate = String(this.currentCate).trim();
 
                 this.currentCate = '';
@@ -59,6 +94,20 @@
                 }
 
                 this.categories.push(currentCate);
+            },
+
+            removeTag (e) {
+                let target = e.target;
+
+                if (target.className === 'alg-cate-tags') {
+                    this.categories.splice(this.categories.indexOf(target.innerText), 1);
+                }
+            }
+        },
+
+        computed: {
+            cateLen () {
+                return this.categories.length;
             }
         }
     }
